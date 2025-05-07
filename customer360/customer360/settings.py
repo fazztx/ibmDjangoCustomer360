@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,12 +26,14 @@ SECRET_KEY = 'django-insecure-ue^r=)*_o79x8afzih30z9z3@b8f@meobccwr^o%+)*b4fhpb$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"] #List of strings representing the host/domain names that this Django site can serve.
+
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'customer360', #Add name of the app
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -74,8 +77,12 @@ WSGI_APPLICATION = 'customer360.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', #Connector to Postgresql
+        'NAME': 'customer360',
+        'USER': 'postgres',
+        'PASSWORD': 'trialDemo',
+        'HOST': 'localhost',
+        'PORT': '5433', #Port assigned
     }
 }
 
@@ -115,6 +122,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR,"static/"),
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
